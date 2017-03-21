@@ -1,6 +1,6 @@
 # bravetrue
 
-FIXME: description
+Exercises for the Clojure for the Brave and True Book by Daniel Higginbotham
 
 ## Installation
 

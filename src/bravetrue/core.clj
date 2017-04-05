@@ -1,6 +1,7 @@
 (ns bravetrue.core
   (:gen-class)
-  (:require [bravetrue.chapter-one :as one]))
+  (:require [bravetrue.chapter-one :as one]
+            [bravetrue.chapter-four :as four]))
 
 (defn -main
   "I don't do a whole lot ... yet."
@@ -14,8 +15,8 @@
   (let [dec8 (one/dec-maker 8)]
     (prn (str "Using dec8 to dec8 from 98 " (dec8 98))))
   (prn (one/map-set "h"))
-  (prn (one/map-set "x" "h"))
-  (prn (one/map-set "y" "x" "h"))
-  (prn (one/map-set "z" "y" "x" "h"))
-  (prn (one/map-set "x" "x" "x"))
+  (prn four/filepath)
+  (prn (slurp four/filepath))
+  (prn (four/parse (slurp four/filepath)))
+  (prn (first (four/mapify (four/parse (slurp four/filepath)))))
   (println "Hello, World!"))

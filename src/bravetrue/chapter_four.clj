@@ -11,6 +11,12 @@
 (def conversions {:name identity
                   :glitter-index str->int})
 
+(defn reduce-map
+  "Map in terms of reduce"
+  [fnc sequence]
+  (reduce #(conj %1 (fnc %2)) [] sequence))
+
+
 (defn convert
   [vamp-key value]
   ((get conversions vamp-key) value))
@@ -21,6 +27,11 @@
   (map #(clojure.string/split % #",")
        (clojure.string/split string #"\n")))
 
+(defn parse-two
+  "Parse strings"
+  [string]
+  (map #(clojure.string/split % #",") (clojure.string/split-lines string)))
+
 (defn mapify
   "Return a seq of maps like {:name \"Edward Cullen\" :glitter-index 10}"
   [rows]
@@ -30,3 +41,15 @@
                  {}
                  (map vector vamp-keys unmapped-row)))
        rows))
+
+(defn glitter-filter
+  [minimum-glitter records]
+  (filter #(>= (:glitter-index %) minimum-glitter) records))
+
+(defn filtered-names
+  [vampires]
+  (reduce (fn [new-map [key val]]
+            (get :name))
+          '()
+          vampires))
+

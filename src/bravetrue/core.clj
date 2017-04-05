@@ -19,4 +19,6 @@
   (prn (slurp four/filepath))
   (prn (four/parse (slurp four/filepath)))
   (prn (first (four/mapify (four/parse (slurp four/filepath)))))
+  (prn (four/reduce-map #(+ 1 %) '(1 2 3)))
+  (prn (four/convert :glitter-index "3"))
   (println "Hello, World!"))

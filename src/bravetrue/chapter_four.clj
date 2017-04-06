@@ -8,8 +8,15 @@
   [str]
   (Integer. str))
 
+(defn has-vampire-property?
+  [property vampire]
+  (not (nil? (get vampire property))))
+
 (def conversions {:name identity
                   :glitter-index str->int})
+
+(def validations {:name #(has-vampire-property? :name %)
+                  :glitter-index #(has-vampire-property? :glitter-index %)})
 
 (defn reduce-map
   "Map in terms of reduce"
@@ -53,3 +60,12 @@
 (defn append
   [vampires new-guy]
   (conj vampires new-guy))
+
+(defn bad-vampire?
+  [vampire validations]
+  (some #(do
+           (prn %)
+           (some (fn [vamp-key] (nil? (get validations vamp-key vampire))) vamp-keys)
+           (true? %)) vamp-keys))
+
+(def validate (complement bad-vampire?))

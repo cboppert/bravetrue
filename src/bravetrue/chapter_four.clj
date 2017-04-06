@@ -49,3 +49,7 @@
 (defn filtered-names
   [vampires]
   (reduce #(conj %1 (get %2 :name)) [] vampires))
+
+(defn append
+  [vampires new-guy]
+  (conj vampires new-guy))

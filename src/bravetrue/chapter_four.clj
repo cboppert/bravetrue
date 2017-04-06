@@ -48,8 +48,4 @@
 
 (defn filtered-names
   [vampires]
-  (reduce (fn [new-map [key val]]
-            (get :name))
-          '()
-          vampires))
-
+  (reduce #(conj %1 (get %2 :name)) [] vampires))
